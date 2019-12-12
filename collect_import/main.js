@@ -52,7 +52,7 @@ define([
         Jupyter.toolbar.add_buttons_group([
             Jupyter.keyboard_manager.actions.register ({
             'help': 'collect importing modules',
-            'icon' : 'fa-play-circle',
+            'icon' : 'fa-suitcase',
             'handler': put_imports_cell
             }, 'put-imports-cell', 'no prefix')
         ])
