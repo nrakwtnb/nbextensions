@@ -6,12 +6,12 @@ define([
     var put_executed_cells = function (){
         var pyfile = Jupyter.notebook.base_url + "nbextensions/notebook_history/main.py";
         var callback = function(output){
-            console.log(output)
             result = output.content.data["text/plain"];
-            console.log(result)
-            result = JSON.parse( result.replace(/\\'/g, "'").replace(/\\\\n/g, "\\n").slice(1,-1) );
+            result = JSON.parse( result.replace(/\\'/g, "'").replace(/\\\\\"/g, "\\\"").replace(/\\\\n/g, "\\n").slice(1,-1) );
             Object.keys(result).forEach(i => {
                 Jupyter.notebook.insert_cell_at_index("code", i-1).set_text(result[i]);
+                cell = Jupyter.notebook.get_cell(i-1)
+                cell.set_input_prompt(parseInt(i))
             });
         };
         $.get(pyfile).done(
